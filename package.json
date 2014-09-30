@@ -1,7 +1,7 @@
 {
-  "name": "nucks-ticket-micro",
+  "name": "node-webapp",
   "version": "0.1.0",
-  "description": "The microsite developed for a responsive experience to buying Canucks tickets",
+  "description": "The basic stuff required for a node webapp",
   "author": {
     "name": "Mark Niehe",
     "email": "mark.niehe@canucks.com"
@@ -10,16 +10,8 @@
     {
       "name": "Mark Niehe",
       "email": "mark.niehe@canucks.com"
-    },
-    {
-      "name": "Calvin Roex",
-      "email": "calvin.roex@canucks.com"
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/VancouverCanucks/ticketing"
-  },
   "dependencies": {
     "bower": "^1.3.11",
     "express-handlebars": "^1.1.0",

@@ -1,0 +1,22 @@
+{
+  "name": "susy",
+  "version": "0.0.0",
+  "authors": [
+    "Mark Niehe <mark.niehe@canucks.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/js",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1"
+  }
+}

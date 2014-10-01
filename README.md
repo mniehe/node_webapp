@@ -23,6 +23,6 @@ grunt build
 ```
 #####To run the test server
 ```
-node app/app.js
+npm start
 ```	
 

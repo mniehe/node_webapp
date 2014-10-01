@@ -1,25 +1,27 @@
 var express = require('express.io'),
     exphbs  = require('express-handlebars');
 
+// Create the express app
 var app = express();
-var hbs = exphbs.create({
+app.use(express.static('public/'));
+
+// Load the router
+var router = express.Router();
+app.use('/', require('./routes.js')(router));
+
+var hbsOptions = {
   extname: '.hbs',
   defaultLayout: 'main',
 
-  // Uses multiple partials dirs
+  // Add multiple partial directories to this array
   partialsDir: ['views/partials/']
-});
+}
 
+var hbs = exphbs.create(hbsOptions);
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
-app.use(express.static('public/'));
-
-
-app.get('/', function (req, res) {
-  var data = {title: 'Your first title'};
-  res.render('index', data);
-});
 
 app.listen(3000, function () {
   console.log("Server listening on 127.0.0.1:3000");
 });
+

@@ -11,8 +11,9 @@ module.exports = function(grunt) {
       
       js_frontend: {
         src: [
-          'assets/js/**/*.js',
-          'bower_components/jquery/dist/jquery.js'
+          'bower_components/jquery/dist/jquery.js',
+          'assets/js/*.js',
+          'assets/js/vendor/*.js'
         ],
         dest: 'public/js/main.js',
       },      

@@ -5,5 +5,11 @@ module.exports = function(router) {
     res.render('index', data);
   });
   
+  router.get('*', function(req, res){
+    res.status(404);
+    res.send('Page not found');
+    //res.status(404).render('404_error_template', {title: "Sorry, page not found"});
+  });    
+  
   return router;
 }

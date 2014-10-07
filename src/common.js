@@ -1,4 +1,4 @@
-var env = require('../config/app-config.json');
+var env = require('../config/env_config.json');
 
 exports.config = function() {
   var node_env = process.env.NODE_ENV || 'development';

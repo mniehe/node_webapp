@@ -116,34 +116,65 @@ module.exports = function(grunt) {
     });
   });
   
-  grunt.registerTask('asset_revision', 'Version the assets.', function() {
-    grunt.task.requires('filerev');
+  grunt.registerTask('clear', 'Deletes all old copies of the assets.', function() {
+    // Get a list of all css and js files that have been compiled
+    var oldFiles = grunt.file.expand('public/**/*.{js,css}');
     
-    var view = grunt.file.expand('views/**/*.hbs');
-    var fileRev = {};
+    // Get a list of all handlebar files
+    var view = grunt.file.expand('views/**/*.hbs');    
     
-    for (var fileName in grunt.filerev.summary) {
-      var newFilename = fileName.replace('public','');
-      fileRev[newFilename] = grunt.filerev.summary[fileName].replace('public','');
-    }
+    // For each file found, delete it
+    oldFiles.forEach(function (file) {
+      grunt.file.delete(file);
+    });
     
+    // For each handlebar template
     view.forEach(function (file) {
       var contents = grunt.file.read(file, {encoding: 'utf8'});
       var hashRegex = new RegExp('(src|href)=\"\/(.*)(\.[0-9a-f]{8})(\.js|\.css)\"');
       var found;
       
+      // Test if a hash is found on the end of a css or js file
       while (found = hashRegex.exec(contents)) {
+        console.log("Removing " + found[2] + found[3] + found[4] + " from " + file);
+        // Remove the hash
         contents = contents.replace(found[3] + found[4], found[4]);
       }
       
+      grunt.file.write(file, contents);
+    });
+  });
+  
+  grunt.registerTask('asset_revision', 'Version the assets.', function() {
+    grunt.task.requires('filerev');
+    
+    // Get a list of all handlebar files
+    var view = grunt.file.expand('views/**/*.hbs');
+    var fileRev = {};
+    
+    // Remove the 'public' folder name from the front of all file locations
+    for (var fileName in grunt.filerev.summary) {
+      var newFilename = fileName.replace('public','');
+      fileRev[newFilename] = grunt.filerev.summary[fileName].replace('public','');
+    }
+    
+    // For each handlebar template
+    view.forEach(function (file) {
+      var contents = grunt.file.read(file, {encoding: 'utf8'});
+      var hashRegex = new RegExp('(src|href)=\"\/(.*)(\.[0-9a-f]{8})(\.js|\.css)\"');
+      var found;
+      
+      // For each file whos content was hashed
       for (var fileName in fileRev) {
         var fileRegex = new RegExp('(src|href)=\"' + fileName + '"');
         
+        // Search for the file name in the template
         while (found = fileRegex.exec(contents)) {
           console.log("Replacing " + fileName + " in " + file);
           contents = contents.replace(fileName, fileRev[fileName])
         }
         
+        // Write the new contents back into the file
         grunt.file.write(file, contents.replace(fileName, fileRev[fileName]));
       }
     });

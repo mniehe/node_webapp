@@ -100,7 +100,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'clear',
-    'compass:prod',
+    'compass:watch',
     'concat',
     'watch'
   ]);

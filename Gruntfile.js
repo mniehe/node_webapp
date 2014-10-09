@@ -33,6 +33,16 @@ module.exports = function(grunt) {
       }    
     },
     
+    filerev: {
+      options: {
+        algorithm: 'md5',
+        length: 8
+      },
+      assets: {
+        src: 'public/**/*.{css,js}'
+      }
+    },     
+    
     compass: {                  // Task
       watch: {                   // Target
         options: {              // Target options
@@ -90,10 +100,59 @@ module.exports = function(grunt) {
   
   grunt.registerTask('default', ['watch']);
   
-  grunt.registerTask('build', [
+  grunt.registerTask('prepare_assets', [
     'concat',
     'uglify',
     'compass:prod',
-    'imagemin'
+    'imagemin',
+    'copy:schedule'
   ]);
+  
+  grunt.registerTask('clear', 'Deletes all old copies of the assets.', function() {
+    var oldFiles = grunt.file.expand('public/**/*.{js,css}');
+    
+    oldFiles.forEach(function (file) {
+      grunt.file.delete(file);
+    });
+  });
+  
+  grunt.registerTask('asset_revision', 'Version the assets.', function() {
+    grunt.task.requires('filerev');
+    
+    var view = grunt.file.expand('views/**/*.hbs');
+    var fileRev = {};
+    
+    for (var fileName in grunt.filerev.summary) {
+      var newFilename = fileName.replace('public','');
+      fileRev[newFilename] = grunt.filerev.summary[fileName].replace('public','');
+    }
+    
+    view.forEach(function (file) {
+      var contents = grunt.file.read(file, {encoding: 'utf8'});
+      var hashRegex = new RegExp('(src|href)=\"\/(.*)(\.[0-9a-f]{8})(\.js|\.css)\"');
+      var found;
+      
+      while (found = hashRegex.exec(contents)) {
+        contents = contents.replace(found[3] + found[4], found[4]);
+      }
+      
+      for (var fileName in fileRev) {
+        var fileRegex = new RegExp('(src|href)=\"' + fileName + '"');
+        
+        while (found = fileRegex.exec(contents)) {
+          console.log("Replacing " + fileName + " in " + file);
+          contents = contents.replace(fileName, fileRev[fileName])
+        }
+        
+        grunt.file.write(file, contents.replace(fileName, fileRev[fileName]));
+      }
+    });
+  });  
+  
+  grunt.registerTask('build', 'Build the project incuding the assets.', function() {
+    grunt.task.run('clear');
+    grunt.task.run('prepare_assets');
+    grunt.task.run('filerev');
+    grunt.task.run('asset_revision');
+  });
 };

@@ -48,7 +48,7 @@ module.exports = function(grunt) {
         options: {              // Target options
           sassDir: 'assets/scss',
           cssDir: 'public/css',
-          config: 'config/dev-config.rb'
+          config: 'config/dev_config.rb'
         }
       },
         
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
         options: {              // Target options
           sassDir: 'assets/scss',
           cssDir: 'public/css',
-          config: 'config/prod-config.rb'
+          config: 'config/prod_config.rb'
         }
       }        
     },

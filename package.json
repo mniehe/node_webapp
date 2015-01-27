@@ -13,7 +13,9 @@
     }
   ],
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "preinstall": "bundle install",
+    "postinstall": "bower install"
   },
   "main": "app.js",
   "repository": {

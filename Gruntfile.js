@@ -74,6 +74,9 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      options: {
+        livereload: true,
+      },
       scripts: {
         files: ['assets/js/**/*.js'],
         tasks: ['concat:js_frontend'],

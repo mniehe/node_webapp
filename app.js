@@ -20,11 +20,11 @@ var hbs = exphbs.create({
   defaultLayout: 'main',
 
   // Uses multiple partials dirs
-  partialsDir: [__dirname + '/views/partials/']
+  partialsDir: [__dirname + '/src/views/partials/']
 });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
-app.set('views', __dirname + '/views/');
+app.set('views', __dirname + '/src/views/');
 
 app.listen(config.port, function () {
   console.log("Server listening on 127.0.0.1:" + config.port);

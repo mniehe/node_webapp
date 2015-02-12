@@ -5,11 +5,8 @@ require 'breakpoint'
 
 project_type = :stand_alone
 http_path = "/"
-sass_dir = "src/scss"
-css_dir = "src/assets/css"
-images_dir = "img"
-fonts_dir = "fonts"
-javascripts_dir = "js"
+sass_dir = "assets/scss"
+css_dir = ".tmp/css"
 line_comments = false
 preferred_syntax = :scss
 output_style = :expanded

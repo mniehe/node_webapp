@@ -6,10 +6,10 @@ var config = common.config();
 
 var express = require('express.io'),
     exphbs  = require('express-handlebars');
-    
+
 // Create the express app
 var app = express();
-app.use(express.static(__dirname + '/public/'));
+app.use(express.static(__dirname + '/.tmp/'));
 
 // Load the router
 var router = express.Router();

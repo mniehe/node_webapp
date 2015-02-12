@@ -126,6 +126,7 @@ $RECYCLE.BIN/
 
 ### Project Specific ###
 config/config.json
+.tmp/
 
 
 ### Sass ###

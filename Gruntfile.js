@@ -117,24 +117,13 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('clear', 'Deletes all old copies of the assets.', function() {
-    var oldFiles = grunt.file.expand('.tmp/**/*.{js,css}');
-
-    oldFiles.forEach(function (file) {
-      grunt.file.delete(file);
-    });
-  });
-
-  grunt.registerTask('clear', 'Deletes all old copies of the assets.', function() {
-    // Get a list of all css and js files that have been compiled
-    var oldFiles = grunt.file.expand('.tmp/**/*.{js,css}');
-
     // Get a list of all handlebar files
     var view = grunt.file.expand('src/views/**/*.hbs');
 
-    // For each file found, delete it
-    oldFiles.forEach(function (file) {
-      grunt.file.delete(file);
-    });
+    // Remove the the temp directory
+    if (grunt.file.exists('.tmp')) {
+      grunt.file.delete('.tmp');
+    }
 
     // For each handlebar template
     view.forEach(function (file) {

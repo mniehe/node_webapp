@@ -12,8 +12,8 @@ module.exports = function(grunt) {
       prod: {
         src: [
           'bower_components/jquery/dist/jquery.js',
-          'bower_compenents/angular/angular.js',
-          'bower_compenents/angular-ui-router/release/angular-ui-router.js',
+          'bower_compenonts/angular/angular.js',
+          'bower_compenonts/angular-ui-router/release/angular-ui-router.js',
           'assets/js/vendor/*.js',
           'assets/js/*.js',
 
@@ -166,7 +166,6 @@ module.exports = function(grunt) {
   grunt.registerTask('prepare_assets', [
     'compass:prod',
     'ngtemplates',
-    'concat:prod',
     'concat:prod',
     'uglify:prod',
     'imagemin'

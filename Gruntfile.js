@@ -94,14 +94,13 @@ module.exports = function(grunt) {
     },
 
     ngtemplates: {
-
-      // CHANGE THIS TO THE APPROPRIATE APP NAME
-      app_name: {
+      prod: {
         cwd: 'assets/js/app',
         src: 'views/**.html',
         dest: '.tmp/js/app/view.js',
 
         options: {
+          module: 'ANGULAR_APP_NAME',
           htmlmin: {
             collapseBooleanAttributes:      true,
             collapseWhitespace:             true,

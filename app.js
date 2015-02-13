@@ -20,7 +20,8 @@ var hbs = exphbs.create({
   defaultLayout: 'main',
 
   // Uses multiple partials dirs
-  partialsDir: [__dirname + '/src/views/partials/']
+  partialsDir: [__dirname + '/src/views/partials/'],
+  layoutsDir: __dirname + '/src/views/layouts/'
 });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');

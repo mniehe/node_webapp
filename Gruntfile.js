@@ -9,24 +9,41 @@ module.exports = function(grunt) {
         separator: ';',
       },
 
-      js_frontend: {
+      prod: {
         src: [
           'bower_components/jquery/dist/jquery.js',
+          'bower_compenents/angular/angular.js',
+          'bower_compenents/angular-ui-router/release/angular-ui-router.js',
           'assets/js/vendor/*.js',
           'assets/js/*.js',
+
+          '.tmp/js/app/view.js'
         ],
         dest: '.tmp/js/main.concat.js',
+      },
+
+      dev: {
+        src: [
+          'bower_components/jquery/dist/jquery.js',
+          'bower_compenents/angular/angular.js',
+          'bower_compenents/angular-ui-router/release/angular-ui-router.js',
+          'assets/js/vendor/*.js',
+          'assets/js/*.js',
+
+          '.tmp/js/app/view.js'
+        ],
+        dest: '.tmp/js/main.js',
       },
     },
 
     uglify: {
       options: {
         mangle: {
-          except: ['jQuery', 'Swiper']
+          except: ['jQuery', 'angular']
         }
       },
 
-      js_frontend: {
+      prod: {
         files: {
           '.tmp/js/main.js': '.tmp/js/main.concat.js'
         }
@@ -39,12 +56,15 @@ module.exports = function(grunt) {
         length: 8
       },
       assets: {
-        src: '.tmp/**/*.{css,js}'
+        src: [
+          '.tmp/css/style.css',
+          '.tmp/js/main.js'
+        ]
       }
     },
 
     compass: {                  // Task
-      watch: {                   // Target
+      dev: {                   // Target
         options: {              // Target options
           sassDir: 'assets/scss',
           cssDir: '.tmp/css',
@@ -73,13 +93,37 @@ module.exports = function(grunt) {
       }
     },
 
+    ngtemplates: {
+
+      // CHANGE THIS TO THE APPROPRIATE APP NAME
+      app_name: {
+        cwd: 'assets/js/app',
+        src: 'views/**.html',
+        dest: '.tmp/js/app/view.js',
+
+        options: {
+          htmlmin: {
+            collapseBooleanAttributes:      true,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          true,
+            removeComments:                 true, // Only if you don't use comment directives!
+            removeEmptyAttributes:          true,
+            removeRedundantAttributes:      true,
+            removeScriptTypeAttributes:     true,
+            removeStyleLinkTypeAttributes:  true
+          }
+        }
+      }
+    },
+
     watch: {
       options: {
         livereload: true,
       },
+
       scripts: {
         files: ['assets/js/**/*.js'],
-        tasks: ['concat:js_frontend'],
+        tasks: ['ngtemplates','concat:dev'],
         options: {
           spawn: true,
         },
@@ -87,7 +131,15 @@ module.exports = function(grunt) {
 
       compass: {
         files: ['assets/scss/**/*.scss'],
-        tasks: ['compass:watch'],
+        tasks: ['compass:dev'],
+        options: {
+          spawn: true,
+        },
+      },
+
+      js_views: {
+        files: ['assets/js/app/views/**/*.html'],
+        tasks: ['ngtemplates','concat:dev'],
         options: {
           spawn: true,
         },
@@ -101,18 +153,22 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-filerev');
+  grunt.loadNpmTasks('grunt-angular-templates');
 
   grunt.registerTask('default', [
     'clear',
-    'compass:watch',
-    'concat',
+    'compass:dev',
+    'ngtemplates',
+    'concat:dev',
     'watch'
   ]);
 
   grunt.registerTask('prepare_assets', [
     'compass:prod',
-    'concat',
-    'uglify',
+    'ngtemplates',
+    'concat:prod',
+    'concat:prod',
+    'uglify:prod',
     'imagemin'
   ]);
 

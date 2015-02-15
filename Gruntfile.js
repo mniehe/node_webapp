@@ -12,10 +12,10 @@ module.exports = function(grunt) {
       prod: {
         src: [
           'bower_components/jquery/dist/jquery.js',
-          'bower_compenonts/angular/angular.js',
-          'bower_compenonts/angular-ui-router/release/angular-ui-router.js',
-          'assets/js/vendor/*.js',
-          'assets/js/*.js',
+          'bower_components/angular/angular.js',
+          'bower_components/angular-ui-router/release/angular-ui-router.js',
+          'frontend/js/vendor/*.js',
+          'frontend/js/*.js',
 
           '.tmp/js/app/view.js'
         ],
@@ -27,8 +27,8 @@ module.exports = function(grunt) {
           'bower_components/jquery/dist/jquery.js',
           'bower_compenents/angular/angular.js',
           'bower_compenents/angular-ui-router/release/angular-ui-router.js',
-          'assets/js/vendor/*.js',
-          'assets/js/*.js',
+          'frontend/js/vendor/*.js',
+          'frontend/js/*.js',
 
           '.tmp/js/app/view.js'
         ],
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
     compass: {                  // Task
       dev: {                   // Target
         options: {              // Target options
-          sassDir: 'assets/scss',
+          sassDir: 'frontend/scss',
           cssDir: '.tmp/css',
           config: 'config/dev_config.rb'
         }
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
 
       prod: {                   // Target
         options: {              // Target options
-          sassDir: 'assets/scss',
+          sassDir: 'frontend/scss',
           cssDir: '.tmp/css',
           config: 'config/prod_config.rb'
         }
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
       dynamic: {                         // Another target
         files: [{
           expand: true,                  // Enable dynamic expansion
-          cwd: 'assets/img/',            // Src matches are relative to this path
+          cwd: 'frontend/img/',            // Src matches are relative to this path
           src: ['**/*.{png,jpg,gif,ico}'],   // Actual patterns to match
           dest: '.tmp/img/'       // Destination path prefix
         }]
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 
     ngtemplates: {
       prod: {
-        cwd: 'assets/js/app',
+        cwd: 'frontend/js/app',
         src: 'views/**.html',
         dest: '.tmp/js/app/view.js',
 
@@ -121,7 +121,7 @@ module.exports = function(grunt) {
       },
 
       scripts: {
-        files: ['assets/js/**/*.js'],
+        files: ['frontend/js/**/*.js'],
         tasks: ['ngtemplates','concat:dev'],
         options: {
           spawn: true,
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
       },
 
       compass: {
-        files: ['assets/scss/**/*.scss'],
+        files: ['frontend/scss/**/*.scss'],
         tasks: ['compass:dev'],
         options: {
           spawn: true,
@@ -137,7 +137,7 @@ module.exports = function(grunt) {
       },
 
       js_views: {
-        files: ['assets/js/app/views/**/*.html'],
+        files: ['frontend/js/app/views/**/*.html'],
         tasks: ['ngtemplates','concat:dev'],
         options: {
           spawn: true,
@@ -172,7 +172,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('clear', 'Deletes all old copies of the assets.', function() {
     // Get a list of all handlebar files
-    var view = grunt.file.expand('src/views/**/*.hbs');
+    var view = grunt.file.expand('backend/views/**/*.hbs');
 
     // Remove the the temp directory
     if (grunt.file.exists('.tmp')) {
@@ -200,7 +200,7 @@ module.exports = function(grunt) {
     grunt.task.requires('filerev');
 
     // Get a list of all handlebar files
-    var view = grunt.file.expand('src/views/**/*.hbs');
+    var view = grunt.file.expand('backend/views/**/*.hbs');
     var fileRev = {};
 
     // Remove the '.tmp' folder name from the front of all file locations

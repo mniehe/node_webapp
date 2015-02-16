@@ -25,8 +25,8 @@ module.exports = function(grunt) {
       dev: {
         src: [
           'bower_components/jquery/dist/jquery.js',
-          'bower_compenents/angular/angular.js',
-          'bower_compenents/angular-ui-router/release/angular-ui-router.js',
+          'bower_components/angular/angular.js',
+          'bower_components/angular-ui-router/release/angular-ui-router.js',
           'frontend/js/vendor/*.js',
           'frontend/js/*.js',
 

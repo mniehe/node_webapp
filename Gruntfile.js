@@ -115,6 +115,23 @@ module.exports = function(grunt) {
       }
     },
 
+    autoprefixer: {
+      options: {
+        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+      },
+      dev: {
+        src: '.tmp/css/style.css',
+        dest: '.tmp/css/style.css',
+      },
+      prod: {
+        src: '.tmp/css/style.css',
+        dest: '.tmp/css/style.css',
+        options: {
+          map: true
+        }
+      },
+    },
+
     watch: {
       options: {
         livereload: true,
@@ -130,7 +147,7 @@ module.exports = function(grunt) {
 
       compass: {
         files: ['frontend/scss/**/*.scss'],
-        tasks: ['compass:dev'],
+        tasks: ['compass:dev', 'autoprefixer:dev'],
         options: {
           spawn: true,
         },
@@ -153,10 +170,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   grunt.registerTask('default', [
     'clear',
     'compass:dev',
+    'autoprefixer:dev',
     'ngtemplates',
     'concat:dev',
     'watch'
@@ -164,6 +183,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('prepare_assets', [
     'compass:prod',
+    'autoprefixer:prod',
     'ngtemplates',
     'concat:prod',
     'uglify:prod',

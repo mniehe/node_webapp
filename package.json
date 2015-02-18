@@ -28,6 +28,7 @@
     "express.io": "git://github.com/techpines/express.io",
     "grunt": "~0.4.5",
     "grunt-angular-templates": "^0.5.7",
+    "grunt-autoprefixer": "^2.2.0",
     "grunt-contrib-compass": "^1.0.1",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-imagemin": "~0.8.1",

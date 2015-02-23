@@ -5,7 +5,7 @@ var plan   = require('flightplan'),
 // Get the list of servers from the config
 for (var i = 0; i < config.servers.length; i++) {
   var server = config.servers[i];
-  
+
   // Setup the server agent to the unix SSH socket
   if (server.agent == "ssh") {
     server.agent = process.env.SSH_AUTH_SOCK;
@@ -13,7 +13,7 @@ for (var i = 0; i < config.servers.length; i++) {
     console.log(server.name + ": Server agent must be 'ssh'");
     return;
   }
-  
+
   plan.target(server.name, server, server.options);
 }
 
@@ -22,7 +22,7 @@ var folders = {};
 // This function builds the assets and then delivers them to the
 // upload directory on the specified host.
 plan.local(function(local) {
-  var git, public;
+  var git, public, config;
 
   for (var folder in folders) {
     local.log(folder);
@@ -34,11 +34,14 @@ plan.local(function(local) {
   local.log('Collect all assets');
   git = local.exec('git ls-files', {silent: true}).stdout.split('\n');
   public = local.find('.tmp -type f', {silent: true}).stdout.split('\n');
+  config = local.find('config -type f', {silent: true}).stdout.split('\n');
 
   // rsync files to all the target's remote hosts
   local.log('Transfer the found assets to the remote host');
   local.transfer(git, '/home/deployer/tmp');
-  local.transfer(public, '/home/deployer/tmp/public');
+
+  // Copy the non-git files onto the server
+  local.transfer(public.concat(config), '/home/deployer/tmp');
   local.exec('grunt clear', {silent: true});
 });
 
@@ -62,6 +65,8 @@ plan.remote(function(remote) {
     remote.mkdir(folders[folder], {failsafe: true, silent: true});
   }
 
+  // Rename the temp folder to public for server purposes
+  remote.mv('/home/deployer/tmp/.tmp /home/deployer/tmp/public', {silent: true});
   remote.mv('/home/deployer/tmp ' + folders.newBuild, {silent: true});
 });
 

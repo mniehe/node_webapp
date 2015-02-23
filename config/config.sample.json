@@ -1,4 +1,28 @@
 {
+  "servers": [
+    {
+      "name": "dev",
+      "host": "dev.sample.com",
+      "username": "remote-user",
+      "agent": "ssh",
+      "privateKey": "/path/to/key",
+      "options": {
+        "webRoot": "/path/to/remote/webroot/",
+        "pm2Config": "/path/from/webroot/to/pm2config"
+      }      
+    },
+    {
+      "name": "prod",
+      "host": "prod.sample.com",
+      "username": "remote-user",
+      "agent": "ssh",
+      "privateKey": "/path/to/key",
+      "options": {
+        "webRoot": "/path/to/remote/webroot/",
+        "pm2Config": "/path/from/webroot/to/pm2config"
+      }      
+    }    
+  ],
   "development": {
     "database": {
       "username": "root",

@@ -23,9 +23,11 @@
     "url": "https://github.com/mniehe/node_webapp"
   },
   "dependencies": {
-    "bower": "^1.3.11",
     "express-handlebars": "^1.1.0",
-    "express.io": "git://github.com/techpines/express.io",
+    "express.io": "git://github.com/techpines/express.io"
+  },
+  "devDependencies": {
+    "flightplan": "^0.6.0",
     "grunt": "~0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-autoprefixer": "^2.2.0",
@@ -36,9 +38,9 @@
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-filerev": "^2.0.0",
-    "sequelize": "^2.0.1"
+    "sequelize": "^2.0.1",
+    "bower": "^1.3.11"
   },
-  "devDependencies": {},
   "preferGlobal": false,
   "private": true,
   "analyze": true,

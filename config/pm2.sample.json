@@ -1,0 +1,16 @@
+{
+  "apps" : [{
+    "name"             : "app-name",
+    "script"           : "path/to/startup.js",
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+    "cwd"              : "/path/to/server/working/directory",
+    "exec_mode"        : "cluster",
+    "pid_file"         : "/path/to/pid.pid",
+    "error_file"       : "path/to/stderr.log",
+    "out_file"         : "path/to/stdout.log",
+    "env": {
+        "NODE_ENV" : "development",
+        "PORT"     : 12345
+    }
+  }]
+}

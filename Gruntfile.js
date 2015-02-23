@@ -135,7 +135,7 @@ module.exports = function(grunt) {
     copy: {
       frontend_assets: {
         files: [
-          {expand: true, cwd: 'frontend/', src: ['**', '!{js,scss,img}/*'], dest: '.tmp/'},
+          {expand: true, cwd: 'frontend/', src: ['font/**'], dest: '.tmp/'},
         ],
       },
     },    
@@ -170,7 +170,7 @@ module.exports = function(grunt) {
       },
       
       frontend_assets: {
-        files: ['frontend/**/*', '!frontend/{js,scss,img}/**/*'],
+        files: ['frontend/font/**'],
         tasks: ['copy:frontend_assets'],
         options: {
           spawn: true,
@@ -191,22 +191,22 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'clear',
+    'copy:frontend_assets',
     'compass:dev',
     'autoprefixer:dev',
     'ngtemplates',
     'concat:dev',
-    'copy:frontend_assets',
     'watch'
   ]);
 
   grunt.registerTask('prepare_assets', [
+    'copy:frontend_assets',
     'compass:prod',
     'autoprefixer:prod',
     'ngtemplates',
     'concat:prod',
     'uglify:prod',
-    'imagemin',
-    'copy:frontend_assets',
+    'imagemin'
   ]);
 
   grunt.registerTask('clear', 'Deletes all old copies of the assets.', function() {

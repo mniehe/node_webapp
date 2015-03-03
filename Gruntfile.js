@@ -14,8 +14,8 @@ module.exports = function(grunt) {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-ui-router/release/angular-ui-router.js',
-          'frontend/js/vendor/*.js',
-          'frontend/js/*.js',
+          'frontend/js/vendor/**/*.js',
+          'frontend/js/**/*.js',
 
           '.tmp/js/app/view.js'
         ],
@@ -27,8 +27,8 @@ module.exports = function(grunt) {
           'bower_components/jquery/dist/jquery.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-ui-router/release/angular-ui-router.js',
-          'frontend/js/vendor/*.js',
-          'frontend/js/*.js',
+          'frontend/js/vendor/**/*.js',
+          'frontend/js/**/*.js',
 
           '.tmp/js/app/view.js'
         ],
@@ -131,14 +131,14 @@ module.exports = function(grunt) {
         }
       },
     },
-    
+
     copy: {
       frontend_assets: {
         files: [
           {expand: true, cwd: 'frontend/', src: ['font/**'], dest: '.tmp/'},
         ],
       },
-    },    
+    },
 
     watch: {
       options: {
@@ -168,7 +168,7 @@ module.exports = function(grunt) {
           spawn: true,
         },
       },
-      
+
       frontend_assets: {
         files: ['frontend/font/**'],
         tasks: ['copy:frontend_assets'],

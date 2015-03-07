@@ -96,7 +96,7 @@ module.exports = function(grunt) {
     ngtemplates: {
       prod: {
         cwd: 'frontend/js/app',
-        src: 'views/**.html',
+        src: 'views/**/*.html',
         dest: '.tmp/js/app/view.js',
 
         options: {
@@ -135,7 +135,7 @@ module.exports = function(grunt) {
     copy: {
       frontend_assets: {
         files: [
-          {expand: true, cwd: 'frontend/', src: ['font/**'], dest: '.tmp/'},
+          {expand: true, cwd: 'frontend/', src: ['font/**/*'], dest: '.tmp/'},
         ],
       },
     },
@@ -170,7 +170,7 @@ module.exports = function(grunt) {
       },
 
       frontend_assets: {
-        files: ['frontend/font/**'],
+        files: ['frontend/font/**/*'],
         tasks: ['copy:frontend_assets'],
         options: {
           spawn: true,

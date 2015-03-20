@@ -11,11 +11,15 @@ module.exports = function(grunt) {
 
       prod: {
         src: [
-          'bower_components/jquery/dist/jquery.js',
+          //'bower_components/jquery/dist/jquery.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-ui-router/release/angular-ui-router.js',
+          'bower_components/angular-cookies/angular-cookies.js',
           'frontend/js/vendor/**/*.js',
-          'frontend/js/**/*.js',
+
+          // Add the front end app
+          'frontend/js/app/**/*.module.js',
+          'frontend/js/app/**/*.ctrl.js',
 
           '.tmp/js/app/view.js'
         ],
@@ -24,11 +28,15 @@ module.exports = function(grunt) {
 
       dev: {
         src: [
-          'bower_components/jquery/dist/jquery.js',
+          //'bower_components/jquery/dist/jquery.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-ui-router/release/angular-ui-router.js',
+          'bower_components/angular-cookies/angular-cookies.js',
           'frontend/js/vendor/**/*.js',
-          'frontend/js/**/*.js',
+
+          // Add the front end app
+          'frontend/js/app/**/*.module.js',
+          'frontend/js/app/**/*.ctrl.js',
 
           '.tmp/js/app/view.js'
         ],
@@ -96,11 +104,12 @@ module.exports = function(grunt) {
     ngtemplates: {
       prod: {
         cwd: 'frontend/js/app',
-        src: 'views/**/*.html',
+        src: '**/*.html',
         dest: '.tmp/js/app/view.js',
 
+        // Set the module to the module name that you want your templates injected into
         options: {
-          module: 'ANGULAR_APP_NAME',
+          module: 'APP_NAME_HERE',
           htmlmin: {
             collapseBooleanAttributes:      true,
             collapseWhitespace:             true,
@@ -135,7 +144,7 @@ module.exports = function(grunt) {
     copy: {
       frontend_assets: {
         files: [
-          {expand: true, cwd: 'frontend/', src: ['font/**/*'], dest: '.tmp/'},
+          {expand: true, cwd: 'frontend/', src: ['font/**'], dest: '.tmp/'},
         ],
       },
     },
@@ -162,7 +171,7 @@ module.exports = function(grunt) {
       },
 
       js_views: {
-        files: ['frontend/js/app/views/**/*.html'],
+        files: ['frontend/js/app/**/*.html'],
         tasks: ['ngtemplates','concat:dev'],
         options: {
           spawn: true,
@@ -170,7 +179,7 @@ module.exports = function(grunt) {
       },
 
       frontend_assets: {
-        files: ['frontend/font/**/*'],
+        files: ['frontend/font/**'],
         tasks: ['copy:frontend_assets'],
         options: {
           spawn: true,

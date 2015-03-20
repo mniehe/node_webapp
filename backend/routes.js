@@ -1,4 +1,5 @@
-var fix_url = require(__dirname + '/middleware/fix_url.js');
+var path    = require('path'),
+    fix_url = require(path.join(__dirname, '/middleware/fix_url.js'));
 
 module.exports = function(router) {
 

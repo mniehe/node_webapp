@@ -1,15 +1,12 @@
-// Load all the common functions
-var common = require(__dirname + '/backend/common.js');
-
-// Load the config settings file
-var config = common.config();
-
-var express = require('express.io'),
-    exphbs  = require('express-handlebars');
+var path    = require('path'),
+    express = require('express.io'),
+    exphbs  = require('express-handlebars'),
+    common  = require(path.join(__dirname, '/backend/common.js')),
+    config  = common.config();
 
 // Create the express app
 var app = express();
-app.use(express.static(__dirname + '/.tmp/'));
+app.use(express.static(path.join(__dirname, '/.tmp/')));
 
 // Load the router
 var router = express.Router();
@@ -20,12 +17,12 @@ var hbs = exphbs.create({
   defaultLayout: 'main',
 
   // Uses multiple partials dirs
-  partialsDir: [__dirname + '/backend/views/partials/'],
-  layoutsDir: __dirname + '/backend/views/layouts/'
+  partialsDir: [path.join(__dirname, '/backend/views/partials/')],
+  layoutsDir: path.join(__dirname, '/backend/views/layouts/')
 });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
-app.set('views', __dirname + '/backend/views/');
+app.set('views', path.join(__dirname, '/backend/views/'));
 
 app.listen(config.port, function () {
   console.log("Server listening on 127.0.0.1:" + config.port);

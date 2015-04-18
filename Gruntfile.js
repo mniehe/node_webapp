@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
       prod: {
         src: [
-          //'bower_components/jquery/dist/jquery.js',
+          'bower_components/underscore/underscore.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-ui-router/release/angular-ui-router.js',
           'bower_components/angular-cookies/angular-cookies.js',
@@ -19,6 +19,8 @@ module.exports = function(grunt) {
 
           // Add the front end app
           'frontend/js/app/**/*.module.js',
+          'frontend/js/app/**/*.service.js',
+          'frontend/js/app/**/*.factory.js',
           'frontend/js/app/**/*.ctrl.js',
 
           '.tmp/js/app/view.js'
@@ -28,7 +30,7 @@ module.exports = function(grunt) {
 
       dev: {
         src: [
-          //'bower_components/jquery/dist/jquery.js',
+          'bower_components/underscore/underscore.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-ui-router/release/angular-ui-router.js',
           'bower_components/angular-cookies/angular-cookies.js',
@@ -36,6 +38,8 @@ module.exports = function(grunt) {
 
           // Add the front end app
           'frontend/js/app/**/*.module.js',
+          'frontend/js/app/**/*.service.js',
+          'frontend/js/app/**/*.factory.js',
           'frontend/js/app/**/*.ctrl.js',
 
           '.tmp/js/app/view.js'
@@ -95,7 +99,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,                  // Enable dynamic expansion
           cwd: 'frontend/img/',            // Src matches are relative to this path
-          src: ['**/*.{png,jpg,gif,ico}'],   // Actual patterns to match
+          src: ['**/*.{png,jpg,gif,ico,jpeg}'],   // Actual patterns to match
           dest: '.tmp/img/'       // Destination path prefix
         }]
       }
@@ -111,14 +115,14 @@ module.exports = function(grunt) {
         options: {
           module: 'APP_NAME_HERE',
           htmlmin: {
-            collapseBooleanAttributes:      true,
-            collapseWhitespace:             true,
-            removeAttributeQuotes:          true,
-            removeComments:                 true, // Only if you don't use comment directives!
-            removeEmptyAttributes:          true,
-            removeRedundantAttributes:      true,
-            removeScriptTypeAttributes:     true,
-            removeStyleLinkTypeAttributes:  true
+            collapseBooleanAttributes: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+            removeComments: true, // Only if you don't use comment directives!
+            removeEmptyAttributes: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
           }
         }
       }
@@ -156,7 +160,7 @@ module.exports = function(grunt) {
 
       scripts: {
         files: ['frontend/js/**/*.js'],
-        tasks: ['ngtemplates','concat:dev'],
+        tasks: ['ngtemplates', 'concat:dev'],
         options: {
           spawn: true,
         },
@@ -172,19 +176,27 @@ module.exports = function(grunt) {
 
       js_views: {
         files: ['frontend/js/app/**/*.html'],
-        tasks: ['ngtemplates','concat:dev'],
+        tasks: ['ngtemplates', 'concat:dev'],
         options: {
           spawn: true,
         },
       },
 
-      frontend_assets: {
+      fonts: {
         files: ['frontend/font/**'],
         tasks: ['copy:frontend_assets'],
         options: {
           spawn: true,
-        },
-      }
+        }
+      },
+
+      images: {
+        files: ['frontend/images/**/*.{png,jpg,gif,ico,jpeg}'],
+        tasks: ['imagemin'],
+        options: {
+          spawn: true,
+        }
+      },
     }
   });
 
@@ -205,6 +217,7 @@ module.exports = function(grunt) {
     'autoprefixer:dev',
     'ngtemplates',
     'concat:dev',
+    'imagemin',
     'watch'
   ]);
 
@@ -218,9 +231,9 @@ module.exports = function(grunt) {
     'imagemin'
   ]);
 
-  grunt.registerTask('clear', 'Deletes all old copies of the assets.', function() {
+  grunt.registerTask('clear', 'Deletes all old copies of the assets.', function () {
     // Get a list of all handlebar files
-    var view = grunt.file.expand('backend/views/**/*.hbs');
+    var view = grunt.file.expand('backend/views/**/*.html');
 
     // Remove the the temp directory
     if (grunt.file.exists('.tmp')) {
@@ -244,17 +257,17 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('asset_revision', 'Version the assets.', function() {
+  grunt.registerTask('asset_revision', 'Version the assets.', function () {
     grunt.task.requires('filerev');
 
     // Get a list of all handlebar files
-    var view = grunt.file.expand('backend/views/**/*.hbs');
+    var view = grunt.file.expand('backend/views/**/*.html');
     var fileRev = {};
 
     // Remove the '.tmp' folder name from the front of all file locations
     for (var fileName in grunt.filerev.summary) {
-      var newFilename = fileName.replace('\.tmp','');
-      fileRev[newFilename] = grunt.filerev.summary[fileName].replace('\.tmp','');
+      var newFilename = fileName.replace('\.tmp', '');
+      fileRev[newFilename] = grunt.filerev.summary[fileName].replace('\.tmp', '');
     }
 
     // For each handlebar template
@@ -279,7 +292,7 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('build', 'Build the project incuding the assets.', function() {
+  grunt.registerTask('build', 'Build the project incuding the assets.', function () {
     grunt.task.run('clear');
     grunt.task.run('prepare_assets');
     grunt.task.run('filerev');

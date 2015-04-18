@@ -1,20 +1,12 @@
-var path    = require('path'),
-    fix_url = require(path.join(__dirname, '/middleware/fix_url.js'));
+var Boom = require('boom');
 
-module.exports = function(router) {
+var routes = [{
+  method: 'GET',
+  path:'/api/v1/proxy',
+  handler: function (request, reply) {
+      reply("Hello world");
+    });
+  }
+}]
 
-  router.use(fix_url);
-
-  router.get('/', function index(req, res) {
-    var data = {title: 'Your first title'};
-    res.render('index', data);
-  });
-
-  router.get('*', function(req, res){
-    res.status(404);
-    res.send('Page not found');
-    //res.status(404).render('404_error_template', {title: "Sorry, page not found"});
-  });
-
-  return router;
-}
+module.exports = routes;

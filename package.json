@@ -27,7 +27,7 @@
     "flightplan": "latest",
     "good": "latest",
     "good-console": "latest",
-    "hapi": "latest",
+    "hapi": "latest"
   },
   "devDependencies": {
     "bower": "latest",
@@ -38,10 +38,12 @@
     "grunt-contrib-concat": "latest",
     "grunt-contrib-copy": "latest",
     "grunt-contrib-imagemin": "latest",
+    "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-sass": "latest",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-filerev": "latest"
+    "grunt-filerev": "latest",
+    "jshint-stylish": "^1.0.1"
   },
   "preferGlobal": false,
   "private": true,

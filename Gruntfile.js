@@ -144,6 +144,15 @@ module.exports = function (grunt) {
         }
       },
     },
+    
+    jshint: {
+      options: {
+          reporter: require('jshint-stylish')
+      },  
+      frontend: ['frontend/js/**/*.js'],
+      backend: ['backend/**/*.js'],
+      frontend_concat: ['.tmp/js/main.concat.js']
+    },    
 
     copy: {
       frontend_assets: {
@@ -209,6 +218,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.registerTask('default', [
     'clear',
@@ -222,6 +232,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('prepare_assets', [
+    'jshint:backend',
+    'jshint:frontend',
     'copy:frontend_assets',
     'compass:prod',
     'autoprefixer:prod',

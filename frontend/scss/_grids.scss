@@ -1,8 +1,6 @@
 // Requirements
 // ============
 
-@import "susy";
-
 $susy: (
   columns: 12,
   gutters: 1/4,
@@ -11,7 +9,7 @@ $susy: (
     color: green,
     output: overlay,
     toggle: top right,
-  ), 
+  ),
 );
 
 $small-gutter: (
@@ -21,5 +19,5 @@ $small-gutter: (
     color: green,
     output: overlay,
     toggle: top right,
-  ), 
+  ),
 );

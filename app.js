@@ -7,7 +7,7 @@ var path    = require('path'),
 // Create a server with a host and port
 var server = new Hapi.Server();
 server.connection({
-    host: '127.0.0.1',
+    host: '0.0.0.0',
     port: config.port
 });
 
@@ -17,7 +17,7 @@ var goodConfig = {
   options: {
     reporters: [{
       reporter: require('good-console'),
-      args: [{ log: '*', response: '*' , request: '*'}]
+      events: [{ log: '*', response: '*' , request: '*'}]
     }]
   }
 };

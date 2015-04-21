@@ -191,3 +191,4 @@ crashlytics-build.properties
 ### Vagrant ###
 .vagrant/
 
+public/

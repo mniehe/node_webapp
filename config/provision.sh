@@ -1,6 +1,11 @@
 #!/bin/bash
- 
+
 echo "Provisioning virtual machine..."
+
+echo "Installing and updating Ubuntu packages"
+apt-get update > /dev/null
+apt-get upgrade -y > /dev/null
+apt-get install git nginx -y > /dev/null
 
 echo "Setting up default user 'vagrant'"
 sudo -H -u vagrant bash -c 'echo "if [ -f ~/.bashrc ]; then" >> ~/.bash_profile'
@@ -11,7 +16,7 @@ sudo -H -u vagrant bash -c 'echo "fi" >> ~/.bash_profile'
 #wget -qO- https://get.docker.com/ | sh > /dev/null
 #usermod -aG docker vagrant > /dev/null
 
-echo "Setting up web folder and Nginx"
+echo "Setting up web folder"
 mkdir /srv/www > /dev/null
 mkdir /srv/www/webapp > /dev/null
 chown vagrant:vagrant /srv/www -R > /dev/null

@@ -1,52 +1,58 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // For combining JS files into one
     concat: {
       options: {
-        separator: ';',
+        separator: ';'
       },
 
       prod: {
         src: [
           'bower_components/underscore/underscore.js',
           'bower_components/angular/angular.js',
-          'bower_components/angular-ui-router/release/angular-ui-router.js',
           'bower_components/angular-cookies/angular-cookies.js',
+          'bower_components/angular-ui-router/release/angular-ui-router.js',
+          'bower_components/angular-loading-bar/loading-bar.js',  
           'frontend/js/vendor/**/*.js',
 
           // Add the front end app
           'frontend/js/app/**/*.module.js',
+          'frontend/js/app/**/*.ctrl.js',
           'frontend/js/app/**/*.service.js',
           'frontend/js/app/**/*.factory.js',
-          'frontend/js/app/**/*.ctrl.js',
 
           '.tmp/js/app/view.js'
         ],
-        dest: '.tmp/js/main.concat.js',
+        dest: '.tmp/js/main.concat.js'
       },
 
       dev: {
+        options: {
+          sourceMap: true,
+          sourceMapStyle: 'inline'
+        },
+        
         src: [
           'bower_components/underscore/underscore.js',
           'bower_components/angular/angular.js',
-          'bower_components/angular-ui-router/release/angular-ui-router.js',
           'bower_components/angular-cookies/angular-cookies.js',
+          'bower_components/angular-ui-router/release/angular-ui-router.js',
+          'bower_components/angular-loading-bar/loading-bar.js',          
           'frontend/js/vendor/**/*.js',
 
           // Add the front end app
           'frontend/js/app/**/*.module.js',
+          'frontend/js/app/**/*.ctrl.js',
           'frontend/js/app/**/*.service.js',
           'frontend/js/app/**/*.factory.js',
-          'frontend/js/app/**/*.ctrl.js',
 
           '.tmp/js/app/view.js'
         ],
-        dest: '.tmp/js/main.js',
-      },
+        dest: '.tmp/js/main.js'
+      }
     },
 
     uglify: {
@@ -76,21 +82,39 @@ module.exports = function (grunt) {
       }
     },
 
-    compass: {                  // Task
-      dev: {                   // Target
-        options: {              // Target options
-          sassDir: 'frontend/scss',
-          cssDir: '.tmp/css',
-          config: 'config/dev_config.rb'
+    sass: {
+      options: {
+        includePaths: [
+          'bower_components/susy/sass',
+          'bower_components/compass-breakpoint/stylesheets',  
+          'bower_components/compass-mixins/lib'          
+        ]
+      },
+      
+      prod: {
+        options: {
+          sourceMap: false,
+          outputStyle: 'compressed',
+          sourceComments: false,
+          sourceMapEmbed: false,
+          omitSourceMapUrl: false
+        },
+        
+        files: {
+          '.tmp/css/style.css': 'frontend/scss/style.scss'
         }
       },
-
-      prod: {                   // Target
-        options: {              // Target options
-          sassDir: 'frontend/scss',
-          cssDir: '.tmp/css',
-          config: 'config/prod_config.rb'
-        }
+      
+      dev: {
+        options: {
+          sourceMap: true,
+          outputStyle: 'nested',
+          sourceComments: true
+        },
+        
+        files: {
+          '.tmp/css/style.css': 'frontend/scss/style.scss'
+        }        
       }
     },
 
@@ -100,7 +124,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,                  // Enable dynamic expansion
           cwd: 'frontend/img/',            // Src matches are relative to this path
-          src: ['**/*.{png,jpg,gif,ico,jpeg}'],   // Actual patterns to match
+          src: ['**/*.{png,jpg,gif,ico}'],   // Actual patterns to match
           dest: '.tmp/img/'       // Destination path prefix
         }]
       }
@@ -114,16 +138,16 @@ module.exports = function (grunt) {
 
         // Set the module to the module name that you want your templates injected into
         options: {
-          module: 'APP_NAME_HERE',
+          module: 'feedManager',
           htmlmin: {
-            collapseBooleanAttributes: true,
-            collapseWhitespace: true,
-            removeAttributeQuotes: true,
-            removeComments: true, // Only if you don't use comment directives!
-            removeEmptyAttributes: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true
+            collapseBooleanAttributes:      true,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          true,
+            removeComments:                 true, // Only if you don't use comment directives!
+            removeEmptyAttributes:          true,
+            removeRedundantAttributes:      true,
+            removeScriptTypeAttributes:     true,
+            removeStyleLinkTypeAttributes:  true
           }
         }
       }
@@ -135,32 +159,41 @@ module.exports = function (grunt) {
       },
       dev: {
         src: '.tmp/css/style.css',
-        dest: '.tmp/css/style.css',
+        dest: '.tmp/css/style.css'
       },
       prod: {
         src: '.tmp/css/style.css',
         dest: '.tmp/css/style.css',
         options: {
-          map: true
+          map: false
         }
-      },
+      }
     },
-    
+
     jshint: {
       options: {
           reporter: require('jshint-stylish')
-      },  
-      frontend: ['frontend/js/**/*.js'],
-      backend: ['backend/**/*.js'],
-      frontend_concat: ['.tmp/js/main.concat.js']
-    },    
-
-    copy: {
-      frontend_assets: {
-        files: [
-          {expand: true, cwd: 'frontend/', src: ['font/**'], dest: '.tmp/'},
-        ],
       },
+      
+      frontend: {
+        options: {
+          validthis: true
+        },
+        
+        files: {
+          src: ['frontend/js/**/*.js']
+        }
+      },
+      
+      backend: {
+        options: {
+          esnext: true
+        },
+        
+        files: {
+          src: ['backend/**/*.js']
+        }
+      }
     },
     
     browserSync: {
@@ -171,11 +204,27 @@ module.exports = function (grunt) {
             options: {
                 proxy: 'localhost:8080',
                 watchTask: true,
+                online: false,
+                tunnel: true,
+                ui: {
+                  port: 8000
+                }
             }
         }
+    },    
+
+    copy: {
+      frontend_assets: {
+        files: [
+          {expand: true, cwd: 'frontend/', src: ['font/**'], dest: '.tmp/'},
+        ],
+      },
     },
 
     watch: {
+      options: {
+        livereload: true,
+      },
 
       scripts: {
         files: ['frontend/js/**/*.js'],
@@ -185,9 +234,9 @@ module.exports = function (grunt) {
         },
       },
 
-      compass: {
+      styles: {
         files: ['frontend/scss/**/*.scss'],
-        tasks: ['compass:dev', 'autoprefixer:dev'],
+        tasks: ['sass:dev', 'autoprefixer:dev'],
         options: {
           spawn: true,
         },
@@ -222,7 +271,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'clear',
     'copy:frontend_assets',
-    'compass:dev',
+    'sass:dev',
     'autoprefixer:dev',
     'ngtemplates',
     'concat:dev',
@@ -235,7 +284,7 @@ module.exports = function (grunt) {
     'jshint:backend',
     'jshint:frontend',
     'copy:frontend_assets',
-    'compass:prod',
+    'sass:prod',
     'autoprefixer:prod',
     'ngtemplates',
     'concat:prod',

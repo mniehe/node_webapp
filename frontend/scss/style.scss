@@ -1,16 +1,8 @@
 // Screen
 // ======
 
-@import "normalize";
 @import "breakpoint";
-@import "compass";
 @import "susy";
-
-// Removes the unquote() deprecation warning from compass
-@mixin box-sizing($value) {
-    -moz-box-sizing: $value;
-         box-sizing: $value;
-}
 
 // Variables and mixins
 @import "grids";

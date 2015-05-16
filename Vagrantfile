@@ -1,25 +1,16 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-Vagrant.configure(2) do |config|
+VAGRANT_API_VERSION = "2"
+ 
+Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 80, host: 80 # Production server
-  config.vm.network "forwarded_port", guest: 35729, host: 35729 # Live reload
-  config.vm.network "forwarded_port", guest: 8080, host: 8080 # Development server
+  config.vm.network "private_network", type: "dhcp"
   
-  # config.ssh.username = "deployer"
+  config.vm.network "forwarded_port", guest: 3001, host: 3001 # Development server
 
   config.vm.provider "virtualbox" do |vb|
-    # Display the VirtualBox GUI when booting the machine
-    vb.gui = false
-    # Customize the amount of memory on the VM:
-    vb.memory = "1024"
-    vb.name = "Node Webapp Starter"
+    vb.memory = "4096"
+    vb.name = "node-webapp"
     vb.cpus = 1
   end
 

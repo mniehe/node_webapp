@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
-
+  require('load-grunt-tasks')(grunt);
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -161,11 +162,20 @@ module.exports = function (grunt) {
         ],
       },
     },
+    
+    browserSync: {
+        dev: {
+            bsFiles: {
+                src : './tmp/**/*'
+            },
+            options: {
+                proxy: 'localhost:8080',
+                watchTask: true,
+            }
+        }
+    },
 
     watch: {
-      options: {
-        livereload: true,
-      },
 
       scripts: {
         files: ['frontend/js/**/*.js'],
@@ -209,17 +219,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-filerev');
-  grunt.loadNpmTasks('grunt-angular-templates');
-  grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-
   grunt.registerTask('default', [
     'clear',
     'copy:frontend_assets',
@@ -228,6 +227,7 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat:dev',
     'imagemin',
+    'browserSync',
     'watch'
   ]);
 

@@ -1,8 +1,8 @@
-var path    = require('path'),
-    Hapi = require('hapi'),
-    common  = require(path.join(__dirname, '/backend/common.js')),
+var path   = require('path'),
+    Hapi   = require('hapi'),
+    common = require(path.join(__dirname, '/backend/common.js')),
     routes = require(path.join(process.cwd(), '/backend/routes.js')),
-    config  = common.config();
+    config = common.config();
 
 // Create a server with a host and port
 var server = new Hapi.Server();

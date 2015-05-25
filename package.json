@@ -29,8 +29,11 @@
   },
   "devDependencies": {
     "bower": "latest",
-    "jshint-stylish": "latest",
-    "jspm": "^0.15.6"
+    "browser-sync": "^2.7.4",
+    "gulp": "^3.8.11",
+    "gulp-eslint": "^0.12.0",
+    "jspm": "^0.15.6",
+    "require-dir": "^0.3.0"
   },
   "preferGlobal": false,
   "private": true,

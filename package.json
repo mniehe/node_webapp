@@ -29,10 +29,23 @@
   },
   "devDependencies": {
     "bower": "latest",
-    "jshint-stylish": "latest"
+    "jshint-stylish": "latest",
+    "jspm": "^0.15.6"
   },
   "preferGlobal": false,
   "private": true,
   "analyze": true,
-  "license": "MIT"
+  "license": "MIT",
+  "jspm": {
+    "directories": {},
+    "configFile": "config/jspm_config.js",
+    "dependencies": {
+      "aurelia-framework": "github:aurelia/framework@^0.11.0"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
+    }
+  }
 }

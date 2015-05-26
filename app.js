@@ -35,7 +35,7 @@ server.route({
   path: '/{param*}',
   handler: {
     directory: {
-      path: path.join(process.cwd(), '/.tmp'),
+      path: path.join(process.cwd(), '/dist'),
     }
   }
 });

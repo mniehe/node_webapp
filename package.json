@@ -28,7 +28,6 @@
     "hapi": "latest"
   },
   "devDependencies": {
-    "bower": "latest",
     "browser-sync": "^2.7.4",
     "gulp": "^3.8.11",
     "gulp-eslint": "^0.12.0",
@@ -40,10 +39,13 @@
   "analyze": true,
   "license": "MIT",
   "jspm": {
-    "directories": {},
+    "directories": {
+      "packages": "dist/jspm_packages"
+    },
     "configFile": "config/jspm_config.js",
     "dependencies": {
-      "aurelia-framework": "github:aurelia/framework@^0.11.0"
+      "aurelia-framework": "github:aurelia/framework@^0.11.0",
+      "materialize": "github:dogfalo/materialize@^0.96.1"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.1.13",

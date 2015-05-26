@@ -30,8 +30,18 @@
   "devDependencies": {
     "browser-sync": "^2.7.4",
     "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-changed": "^1.2.1",
+    "gulp-copy": "0.0.2",
     "gulp-eslint": "^0.12.0",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-nodemon": "^2.0.3",
+    "gulp-sass": "^2.0.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "imagemin-pngquant": "^4.1.0",
     "jspm": "^0.15.6",
+    "materialize-sass": "^0.95.2",
+    "object.assign": "^3.0.0",
     "require-dir": "^0.3.0"
   },
   "preferGlobal": false,
@@ -40,7 +50,7 @@
   "license": "MIT",
   "jspm": {
     "directories": {
-      "packages": "dist/jspm_packages"
+      "baseURL": "dist"
     },
     "configFile": "config/jspm_config.js",
     "dependencies": {

@@ -1,12 +1,10 @@
 // Screen
 // ======
 
-@import "breakpoint";
-@import "susy";
+@import 'materialize';
 
 // Variables and mixins
-@import "grids";
-@import "variables";
+@import 'variables';
 
 // Section layouts
-@import "layout";
+@import 'layout';

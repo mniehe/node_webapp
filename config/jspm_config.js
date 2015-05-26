@@ -1,19 +1,15 @@
 System.config({
-  "baseURL": "/",
   "transpiler": "babel",
   "babelOptions": {
     "optional": [
-      "runtime",
-      "es7.decorators",
-      "es7.classProperties"
+      "runtime"
     ]
   },
   "paths": {
     "*": "*.js",
-    "github:*": "dist/jspm_packages/github/*.js",
-    "npm:*": "dist/jspm_packages/npm/*.js"
-  },
-  "packages": "dist/jspm_packages"
+    "github:*": "jspm_packages/github/*.js",
+    "npm:*": "jspm_packages/npm/*.js"
+  }
 });
 
 System.config({

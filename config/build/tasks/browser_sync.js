@@ -5,10 +5,10 @@ var browserSync = require('browser-sync').create();
 gulp.task('browserSync', function() {
     browserSync.init({
         proxy: "localhost:" + (process.env.PORT || 3000),
-        port: 8000,
+        port: 8080,
         
         // Do not up a browser on startup
-        open: false,
+        open: true,
         
         // Auto inject changes to CSS and JS into the browser
         injectChanges: true,

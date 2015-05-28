@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-var routes = [{
-  method: 'GET',
-  path: '/api/v1/proxy',
+var routes = [ {
+  method : 'GET',
+  path   : '/api/v1/proxy',
   handler: function (request, reply) {
-      reply("Hello world");
+      reply('Hello world');
     }
   }
 ];
 
-module.exports = routes;
+module.exports = routes;  

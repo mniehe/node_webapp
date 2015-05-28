@@ -8,7 +8,7 @@ gulp.task('default', function(cb) {
 gulp.task('build', function() {
   runSequence(
     'clean',
-    'lint',
+    ['lint:frontend', 'lint:backend'],
     ['build:js', 'build:images', 'build:sass', 'copy:jspm_config']
   );
 });

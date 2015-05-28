@@ -44,7 +44,8 @@
     "jspm": "^0.15.6",
     "materialize-sass": "^0.95.2",
     "object.assign": "^3.0.0",
-    "require-dir": "^0.3.0"
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.0"
   },
   "preferGlobal": false,
   "private": true,

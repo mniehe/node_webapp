@@ -8,9 +8,15 @@ var assign = Object.assign || require('object.assign');
 
 gulp.task('build:js', function() {
   return gulp.src(paths.frontend.source)
+    .pipe(babel(compilerOptions))
+    .pipe(gulp.dest(paths.output.source));
+});
+
+gulp.task('build:js:dev', function() {
+  return gulp.src(paths.frontend.source)
     .pipe(changed(paths.output.source))
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(babel(assign({}, compilerOptions, {modules:'system'})))
+    .pipe(babel(compilerOptions))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.output.source));
 });

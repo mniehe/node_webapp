@@ -9,6 +9,7 @@ var root = {
 
 module.exports = {
   frontend: {
+    root: root.frontend,
     source: root.frontend + 'js/**/*.js',
     html: root.frontend + 'js/**/*.html',
     styles: root.frontend + 'scss/**/*.scss',
@@ -17,10 +18,12 @@ module.exports = {
   },
   
   backend: {
+    root: root.backend,
     source: root.backend + '**/*.js'
   },
   
   output: {
+    root: root.output,
     source: root.output + 'js',
     styles: root.output + 'css',
     images: root.output + 'img'

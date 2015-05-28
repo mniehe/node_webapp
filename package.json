@@ -14,8 +14,9 @@
   ],
   "scripts": {
     "start": "node app.js",
+    "start:dev": "gulp",
     "postinstall": "bower install",
-    "start:dev": "gulp"
+    "build": "gulp build"
   },
   "main": "app.js",
   "repository": {
@@ -33,6 +34,7 @@
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
     "gulp-changed": "^1.2.1",
+    "gulp-clean": "^0.3.1",
     "gulp-copy": "0.0.2",
     "gulp-eslint": "^0.12.0",
     "gulp-imagemin": "^2.2.1",

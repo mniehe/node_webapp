@@ -1,8 +1,8 @@
-var Boom = require('boom');
+"use strict";
 
 var routes = [{
   method: 'GET',
-  path:'/api/v1/proxy',
+  path: '/api/v1/proxy',
   handler: function (request, reply) {
       reply("Hello world");
     }

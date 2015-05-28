@@ -13,9 +13,8 @@
     }
   ],
   "scripts": {
-    "start": "node app.js",
-    "start:dev": "gulp",
-    "postinstall": "bower install",
+    "dev": "gulp",
+    "prod": "node app.js",
     "build": "gulp build"
   },
   "main": "app.js",

@@ -16,7 +16,7 @@
     "postinstall": "jspm install",
     "dev": "gulp",
     "prod": "node app.js",
-    "build": "gulp build"
+    "build": "gulp build && jspm bundle-sfx app dist/js/bundle.js"
   },
   "main": "app.js",
   "repository": {

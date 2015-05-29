@@ -59,6 +59,7 @@
     },
     "configFile": "config/jspm_config.js",
     "dependencies": {
+      "aurelia-bootstrapper": "github:aurelia/bootstrapper@^0.12.0",
       "aurelia-framework": "github:aurelia/framework@^0.11.0",
       "materialize": "github:dogfalo/materialize@^0.96.1"
     },

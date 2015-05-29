@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -9,14 +9,15 @@
   <link rel="stylesheet" href="/css/style.css">
   <title>A TITLE</title>
 </head>
-<body>
+<body aurelia-app>
   <main>
     <h1>yo</h1>
   </main>
   <script src="/jspm_packages/system.js"></script>
   <script src="/jspm_config.js"></script>
   <script>
-    System.import('js/app/app');
+    System.import('aurelia-bootstrapper');
+    System.import('app');
   </script>
 </body>
 </html>

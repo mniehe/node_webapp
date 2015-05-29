@@ -7,6 +7,6 @@ gulp.task('server', function () {
     script: 'app.js',
     ext: 'js html',
     env: { 'NODE_ENV': 'development' },
-    ignore: ['config/*', 'frontend/*', 'node_modules/*', 'test/*']
+    ignore: ['config/*', 'frontend/*', 'node_modules/*', 'test/*', 'dist/*']
   });
 });

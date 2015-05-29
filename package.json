@@ -13,6 +13,7 @@
     }
   ],
   "scripts": {
+    "postinstall": "jspm install",
     "dev": "gulp",
     "prod": "node app.js",
     "build": "gulp build"
@@ -45,6 +46,7 @@
     "materialize-sass": "^0.95.2",
     "object.assign": "^3.0.0",
     "require-dir": "^0.3.0",
+    "rimraf": "^2.3.4",
     "run-sequence": "^1.1.0"
   },
   "preferGlobal": false,

@@ -45,7 +45,7 @@ System.config({
       "aurelia-html-template-element": "github:aurelia/html-template-element@0.2.0",
       "aurelia-path": "github:aurelia/path@0.6.1",
       "core-js": "npm:core-js@0.9.13",
-      "webcomponentsjs": "github:webcomponents/webcomponentsjs@0.6.2"
+      "webcomponentsjs": "github:webcomponents/webcomponentsjs@0.6.3"
     },
     "github:aurelia/metadata@0.5.0": {
       "core-js": "npm:core-js@0.9.13"

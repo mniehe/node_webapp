@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var paths = require('../paths');
 
 gulp.task('watch', [
-    'build:js', 
+    'build:js:dev', 
     'build:sass', 
     'build:images', 
     'copy:jspm_config', 

@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var plumber = require('gulp-plumber');
 var paths = require('../paths');
 var changed = require('gulp-changed');
 var babel = require('gulp-babel');
@@ -14,9 +15,10 @@ gulp.task('build:js', function() {
 
 gulp.task('build:js:dev', function() {
   return gulp.src(paths.frontend.source)
+    .pipe(plumber())
     .pipe(changed(paths.output.source))
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(babel(compilerOptions))
+    .pipe(babel(compilerOptions)) 
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.output.source));
 });

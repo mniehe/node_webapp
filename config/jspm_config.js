@@ -6,7 +6,7 @@ System.config({
     ]
   },
   "paths": {
-    "*": "js/app/*.js",
+    "*": "js/*.js",
     "github:*": "jspm_packages/github/*.js",
     "npm:*": "jspm_packages/npm/*.js"
   }
@@ -16,6 +16,8 @@ System.config({
   "map": {
     "aurelia-bootstrapper": "github:aurelia/bootstrapper@0.12.0",
     "aurelia-framework": "github:aurelia/framework@0.11.0",
+    "aurelia-logging-console": "github:aurelia/logging-console@0.4.0",
+    "aurelia-templating-binding": "github:aurelia/templating-binding@0.11.0",
     "babel": "npm:babel-core@5.4.7",
     "babel-runtime": "npm:babel-runtime@5.4.7",
     "core-js": "npm:core-js@0.9.13",

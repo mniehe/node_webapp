@@ -5,8 +5,7 @@ gulp.task('watch', [
     'build:js:dev', 
     'build:sass', 
     'build:images', 
-    'copy:jspm_config', 
-    'copy:html'
+    'copy'
   ], 
   function() {
   gulp.watch(paths.frontend.source, ['build:js:dev']);

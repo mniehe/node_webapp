@@ -4,10 +4,15 @@ var pack = require('../../package.json');
 var root = {
   backend: 'backend/',
   frontend: 'frontend/',
-  output: 'dist/'
+  output: 'dist/',
+  library: 'node_modules/'
 };
 
 module.exports = {
+  library: {
+    materialize: root.library + 'materialize-sass/'
+  },
+   
   frontend: {
     root: root.frontend,
     source: root.frontend + 'js/**/*.js',
@@ -26,6 +31,7 @@ module.exports = {
     root: root.output,
     source: root.output + 'js',
     styles: root.output + 'css',
-    images: root.output + 'img'
+    images: root.output + 'img',
+    fonts: root.output + 'font'
   }
 };

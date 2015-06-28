@@ -1,3 +1,4 @@
+
 {
   "name": "node-webapp",
   "version": "0.0.1",
@@ -14,9 +15,10 @@
   ],
   "scripts": {
     "postinstall": "jspm install",
-    "dev": "gulp",
-    "prod": "node app.js",
-    "build": "gulp build && jspm bundle-sfx app dist/js/bundle.js"
+    "dev": "NODE_ENV=development gulp --harmony",
+    "prod": "NODE_ENV=production node --harmony app.js",
+    "build": "gulp build && jspm bundle-sfx app dist/js/bundle.js",
+    "test": "NODE_ENV=test mocha --harmony --require co-mocha --reporter spec --recursive"
   },
   "main": "app.js",
   "repository": {
@@ -24,13 +26,20 @@
     "url": "https://github.com/mniehe/node_webapp"
   },
   "dependencies": {
-    "boom": "latest",
-    "good": "latest",
-    "good-console": "latest",
-    "hapi": "latest"
+    "koa": "^0.21.0",
+    "koa-better-body": "^1.0.17",
+    "koa-logger": "^1.2.2",
+    "koa-router": "^5.1.2",
+    "koa-static": "^1.4.9",
+    "koa-validate": "^0.2.11",
+    "mongoose": "^4.0.6",
+    "validator": "^3.40.1"
   },
   "devDependencies": {
     "browser-sync": "^2.7.4",
+    "chai": "^3.0.0",
+    "co-mocha": "^1.1.2",
+    "co-supertest": "0.0.10",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
     "gulp-changed": "^1.2.1",
@@ -44,10 +53,12 @@
     "imagemin-pngquant": "^4.1.0",
     "jspm": "^0.15.6",
     "materialize-sass": "^0.95.2",
+    "mocha": "^2.2.5",
     "object.assign": "^3.0.0",
     "require-dir": "^0.3.0",
     "rimraf": "^2.3.4",
-    "run-sequence": "^1.1.0"
+    "run-sequence": "^1.1.0",
+    "supertest": "^1.0.1"
   },
   "preferGlobal": false,
   "private": true,

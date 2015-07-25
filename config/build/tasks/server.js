@@ -7,6 +7,9 @@ gulp.task('server', function () {
     script: 'app.js',
     ext: 'js html',
     env: { 'NODE_ENV': 'development' },
+    execMap: {
+      js: "node --harmony --use_strict"
+    },    
     ignore: ['config/*', 'frontend/*', 'node_modules/*', 'test/*', 'dist/*']
   });
 });

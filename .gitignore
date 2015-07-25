@@ -93,3 +93,4 @@ $RECYCLE.BIN/
 .Trash-*
 
 /dist/
+.env

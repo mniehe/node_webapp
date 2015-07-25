@@ -20,7 +20,7 @@ gulp.task('browserSync', function() {
         files: [paths.output.source, paths.output.styles],
         
         ui: {
-          port: 8080
+          port: 8081
         }
     });
 });

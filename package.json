@@ -29,9 +29,11 @@
     "koa": "^0.21.0",
     "koa-better-body": "^1.0.17",
     "koa-logger": "^1.2.2",
+    "koa-render": "^0.2.1",
     "koa-router": "^5.1.2",
     "koa-static": "^1.4.9",
     "koa-validate": "^0.2.11",
+    "underscore": "^1.8.3",
     "validator": "^3.40.1"
   },
   "devDependencies": {
